@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button start menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-capitalize>{{quoteGroup.category}} Quotes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-card *ngFor="let quote of quoteGroup.quotes; let i = index">
+  <ion-card-header text-center>
+   #{{i+1}}
+  </ion-card-header>
+  <ion-card-content>
+    {{quote.text}}
+    <p text-right class="author">{{quote.person}}</p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col text-right>
+      <button ion-button
+      clear
+      small
+      (click)="onAddToFavorites(quote)"
+      *ngIf="!isFavorite(quote)">Favorite</button>
+      <button ion-button
+      clear
+      small
+      color="danger"
+      (click)="onRemoveFromFavorites(quote)"
+      *ngIf="isFavorite(quote)">Unfavorite</button>
+    </ion-col>
+  </ion-row>
+</ion-card>
+
+</ion-content>
